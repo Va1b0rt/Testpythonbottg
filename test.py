@@ -32,7 +32,7 @@ with con:
             return "Добавлено в прочитанные"
 
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
+        #cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
         rows = cur.fetchall()
         cur.execute(f"SELECT * FROM `user_statistic` WHERE `chatId` = {chatId} ")
         statistic_rows = cur.fetchall()

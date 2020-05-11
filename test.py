@@ -1,4 +1,6 @@
-﻿import telebot
+﻿#!/usr/bin/env python
+
+import telebot
 import sqlite3 as sql
 import time
 

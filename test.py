@@ -115,7 +115,7 @@ with con:
         rows = cur.fetchall()
         lst = []
         for row in rows:
-            if row not in lst:
+            if str(row).replace("(", "").replace(")", "").replace(",", "").replace("'", "") not in lst:
                 lst.append( str(row).replace("(", "").replace(")", "").replace(",", "").replace("'", ""))
             else:
                 continue

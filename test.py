@@ -29,14 +29,14 @@ with con:
     def add_finished_book(chatId):
 
         def adding(chatId, bookId):
-            cur.execute("INSERT INTO 'user_statistic' VALUES ('{1}','{2}', NULL, NULL)".format(chatId, row[2]))
+            cur.execute("INSERT INTO 'user_statistic' VALUES ('{0}','{1}', NULL, NULL)".format(chatId, row[2]))
             con.commit()
             return "Добавлено в прочитанные"
 
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `menu_position` WHERE `chatId` = {0} ".format(chatId))
         rows = cur.fetchall()
-        cur.execute(f"SELECT * FROM `user_statistic` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `user_statistic` WHERE `chatId` = {0} ".format(chatId))
         statistic_rows = cur.fetchall()
 
         for row in rows:
@@ -48,13 +48,13 @@ with con:
 
     def add_viewed_book(chatId, bookId):
         cur = con.cursor()
-        cur.execute(f" UPDATE `menu_position` SET `viewed_book` = '{bookId}' WHERE `chatId` = {chatId} ")
+        cur.execute(" UPDATE `menu_position` SET `viewed_book` = '{0}' WHERE `chatId` = {1} ".format(bookId, chatId))
         con.commit()
         return
 
     def chek_user(chatId):
             cur = con.cursor()
-            cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
+            cur.execute("SELECT * FROM `menu_position` WHERE `chatId` = {0} ".format(chatId))
             rows = cur.fetchall()
             for row in rows:
                 if row[0] == chatId:
@@ -73,7 +73,7 @@ with con:
 
     def get_menu_position(chatId):
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `menu_position` WHERE `chatId` = {0} ".format(chatId))
         rows = cur.fetchall()
         for row in rows:
             return row[1]
@@ -81,26 +81,26 @@ with con:
     def set_menu_position(chatId, position):
         if chek_user(chatId) == True:
             cur = con.cursor()
-            cur.execute(f" UPDATE `menu_position` SET `position` = '{position}' WHERE `chatId` = {chatId} ")
+            cur.execute(" UPDATE `menu_position` SET `position` = '{0}' WHERE `chatId` = {1} ".format(position, chatId))
             con.commit()
             return
         else:
             cur = con.cursor()
-            cur.execute(f"INSERT INTO `menu_position` VALUES ('{chatId}','{position}', NULL)")
+            cur.execute("INSERT INTO `menu_position` VALUES ('{0}','{1}', NULL)".format(chatId, position))
             con.commit()
             return
 
     def get_statistic(chatId):
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM `books` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `books` WHERE `chatId` = {0} ".format(chatId))
         added_books_rows = cur.fetchall()
-        cur.execute(f"SELECT * FROM `user_statistic` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `user_statistic` WHERE `chatId` = {0} ".format(chatId))
         finished_books_rows = cur.fetchall()
-        cur.execute(f"SELECT * FROM `menu_position` WHERE `chatId` = {chatId} ")
+        cur.execute("SELECT * FROM `menu_position` WHERE `chatId` = {0} ".format(chatId))
         rows = cur.fetchall()
         for row in rows:
             read_book = row[2]
-        cur.execute(f"SELECT * FROM `books` WHERE `ID` = {read_book} ")
+        cur.execute("SELECT * FROM `books` WHERE `ID` = {} ".format(read_book))
         book = cur.fetchall()
         for r in book:
             r[2]
@@ -110,7 +110,7 @@ with con:
     #Получаем список жанров
     def get_all_genre():
         cur = con.cursor()
-        cur.execute(f"SELECT `genre` FROM `books`")
+        cur.execute("SELECT `genre` FROM `books`")
         rows = cur.fetchall()
         lst = []
         for row in rows:
@@ -187,7 +187,7 @@ with con:
                    keyboard1.row('Добавить книгу', 'Прислать случайную книгу')
                    keyboard1.row('Статистика')
                    cur = con.cursor()
-                   cur.execute(f"INSERT INTO `books` VALUES (NULL ,'{message.chat.id}','{name}', '{author}', '{genre}', '{link}', '{description}', NULL)")
+                   cur.execute("INSERT INTO `books` VALUES (NULL ,'{0}','{1}', '{2}', '{3}', '{4}', '{5}', NULL)".format(message.chat.id, name, author, genre, link, description))
                    con.commit()
                    set_menu_position(message.chat.id, None)
                    bot.send_message(message.chat.id, 'Добавлено. Благодарю за пополнение коллекции.', reply_markup=keyboard1)

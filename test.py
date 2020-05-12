@@ -29,7 +29,7 @@ with con:
     def add_finished_book(chatId):
 
         def adding(chatId, bookId):
-            cur.execute(f"INSERT INTO `user_statistic` VALUES ('{chatId}','{row[2]}', NULL, NULL)")
+            cur.execute("INSERT INTO 'user_statistic' VALUES ('{1}','{2}', NULL, NULL)".format(chatId, row[2]))
             con.commit()
             return "Добавлено в прочитанные"
 

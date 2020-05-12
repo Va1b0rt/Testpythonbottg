@@ -3,6 +3,7 @@
 import telebot
 import sqlite3 as sql
 import time
+import latinizator
 
 menu = (('add_book_name', 'add_author','add_book_genre', 'add_book_lnk', 'add_book_description', 'display_info'), ('get_random_book'))
 menu_position = None
@@ -29,7 +30,7 @@ with con:
     def add_finished_book(chatId):
 
         def adding(chatId, bookId):
-            cur.execute("INSERT INTO 'user_statistic' VALUES ('{0}','{1}', NULL, NULL)".format(chatId, row[2]))
+            cur.execute("INSERT INTO 'user_statistic' VALUES ('{0}','{1}', NULL)".format(chatId, row[2]))
             con.commit()
             return "Добавлено в прочитанные"
 
@@ -115,7 +116,7 @@ with con:
         lst = []
         for row in rows:
             if row not in lst:
-                lst.append(str(row).replace("(", "").replace(")", "").replace(",", "").replace("'", ""))
+                lst.append( str(row).replace("(", "").replace(")", "").replace(",", "").replace("'", ""))
             else:
                 continue
         return lst
@@ -237,8 +238,7 @@ with con:
         elif call.data == 'genre':
             kbrd = ganre_keyboard(get_all_genre())
             bot.edit_message_reply_markup(chat_id=call.message.chat.id,  message_id=call.message.message_id, reply_markup=kbrd)
-        elif call.data in genre_lst:
-            
+        elif call.data in genre_lst:            
             bot.edit_message_reply_markup(chat_id=call.message.chat.id,  message_id=call.message.message_id, reply_markup=inline_keyboard(call.data))
 
     def ganre_keyboard(lst):

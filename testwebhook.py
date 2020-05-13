@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import telebot, time
 
-server = Flask('name')
+server = Flask('main')
 bot = telebot.TeleBot('534247055:AAGkXwOFST2ATDcKqNF8g-aT0r9gY-yjgyE')
 bot.remove_webhook()
 time.sleep(2)

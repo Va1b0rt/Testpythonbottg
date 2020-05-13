@@ -23,4 +23,4 @@ def getMessage():
     return "ok", 200
 
 #if name == "main":
-  #server.run(host="IP", port=int(os.environ.get('PORT', '443')), ssl_context=('/Testpythonbottg/cert/rootCA.crt', '/Testpythonbottg/cert/rootCA.key'))
+server.run(host="IP", port=int(os.environ.get('PORT', '443')), ssl_context=('/Testpythonbottg/cert/rootCA.crt', '/Testpythonbottg/cert/rootCA.key'))

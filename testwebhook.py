@@ -15,11 +15,11 @@ def getMessage():
     if "text" in r["message"]:
       text_mess = r["message"]["text"]
     else:
-      bot.send_message(chat_id=chat_id, text="Какая то не понятная проблема", parse_mode='HTML')
+      bot.send_message(chat_id=chat_id, text="Problem", parse_mode='HTML')
       return "ok", 200
 
   if text_mess == '/start':
-    bot.send_message(chat_id=chat_id, text="Привет WebHook")
+    bot.send_message(chat_id=chat_id, text="Hi WebHook")
     return "ok", 200
 
 if name == "main":

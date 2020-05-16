@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 import telebot, time
+import gettoken
 
 server = Flask('main')
-bot = telebot.TeleBot('534247055:AAGkXwOFST2ATDcKqNF8g-aT0r9gY-yjgyE')
+bot = telebot.TeleBot(gettoken.token())
 bot.remove_webhook()
 time.sleep(2)
 bot.set_webhook(url="https://185.43.5.36:8443", certificate=open('/Testpythonbottg/cert/rootCA.crt', 'r'))

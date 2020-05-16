@@ -4,6 +4,7 @@ import telebot
 import sqlite3 as sql
 import time
 import latinizator
+import gettoken
 
 menu = (('add_book_name', 'add_author','add_book_genre', 'add_book_lnk', 'add_book_description', 'display_info'), ('get_random_book'))
 menu_position = None
@@ -14,7 +15,7 @@ genre = None
 link = None
 description = None
 
-bot = telebot.TeleBot('534247055:AAGkXwOFST2ATDcKqNF8g-aT0r9gY-yjgyE')
+bot = telebot.TeleBot(gettoken.token())
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True, True)
 keyboard1.row('Добавить книгу', 'Прислать случайную книгу')

@@ -3,7 +3,7 @@
 import telebot
 import sqlite3 as sql
 import time
-import latinizator
+#import latinizator
 import gettoken
 
 menu = (('add_book_name', 'add_author','add_book_genre', 'add_book_lnk', 'add_book_description', 'display_info'), ('get_random_book'))

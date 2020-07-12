@@ -1,10 +1,15 @@
-import telebot
+import logging
+from aiogram import Bot, Dispatcher, executor, types 
+
 import gettoken
 
-bot = telebot.TeleBot(gettoken.token())
+logging.basicConfig(level=logging.INFO)
+bot = Bot(token = gettoken.token())
+dp = Dispatcher(bot)
 
-@bot.message_handler(commands=['start'])
-def start_message(message):
-    bot.send_message(message.chat.id, 'Привет!\nЭтот бот предназначен для обмена ссылками на аудиокниги в открытом доступе.\nНадеюсь, что ты сможешь найти для себя тут что-нибудь интересное.\nИ буду очень благодарен, если ты добавишь ссылку на свою любимую аудиокнигу.')
+@dp.message_handler()
+async def echo(message: types.Message):
+    await message.reply(message.text)
 
-bot.polling(none_stop=True)
+if __name__ == "__main__":
+    executor.start_polling(dp, skip_updates=True)
